@@ -47,7 +47,7 @@ public class SdlSchemaStringGenerator {
     private static final String SCALAR_TYPE_FORMAT = "%sscalar %s%s";
     private static final String OBJECT_TYPE_FORMAT = "%stype %s%s %s";
     private static final String ENUM_TYPE_FORMAT = "%senum %s %s";
-    private static final String INPUT_TYPE_FORMAT = "input %s %s";
+    private static final String INPUT_TYPE_FORMAT = "%sinput %s %s";
     private static final String FIELD_FORMAT = "%s  %s%s: %s%s";
     private static final String FIELD_BLOCK_FORMAT = "{%n%s%n}";
     private static final String ARGS_FORMAT = "(%s%s%s%s)";
@@ -57,7 +57,7 @@ public class SdlSchemaStringGenerator {
     private static final String BLOCK_STRING_FORMAT = "%s\"\"\"%n%s%s%n%s\"\"\"";
     private static final String IMPLEMENT_FORMAT = " implements %s";
     private static final String POSSIBLE_TYPE_FORMAT = " = %s";
-    private static final String INPUT_FIELD_FORMAT = "  %s: %s";
+    private static final String INPUT_FIELD_FORMAT = "%s  %s: %s";
     private static final String ARGS_TYPE_FORMAT = "%s = %s";
     private static final String ARGS_VALUE_FORMAT = "%s%s%s: %s";
     private static final String ENUM_VALUE_FORMAT = "%s  %s%s";
@@ -159,7 +159,8 @@ public class SdlSchemaStringGenerator {
     }
 
     private static String createInputObjectType(Type type) {
-        return getFormattedString(INPUT_TYPE_FORMAT, type.getName(), createInputValues(type));
+        return getFormattedString(INPUT_TYPE_FORMAT, createTypeDescription(type.getDescription()), type.getName(),
+                createInputValues(type));
     }
 
     private static String createEnumType(Type type) {
@@ -168,16 +169,17 @@ public class SdlSchemaStringGenerator {
     }
 
     private static String createTypeDescription(String description) {
-        if (description == null || description.isEmpty()) {
+        if (description == null) {
             return EMPTY_STRING;
         } else {
-            String desc;
-            if (description.split(LINE_SEPARATOR).length > 1) {
-                desc = getFormattedString(BLOCK_STRING_FORMAT, EMPTY_STRING, EMPTY_STRING, description, EMPTY_STRING);
+            String[] lines = removeLeadingNewLines(description).split(LINE_SEPARATOR);
+            if (lines.length == 1) {
+                return getFormattedString(DESC_FORMAT, getFormattedString(DOCUMENT_FORMAT, EMPTY_STRING, lines[0]));
             } else {
-                desc = getFormattedString(DOCUMENT_FORMAT, EMPTY_STRING, description);
+                String formattedDesc = getFormattedString(BLOCK_STRING_FORMAT, EMPTY_STRING, EMPTY_STRING,
+                        String.join(LINE_SEPARATOR, lines), EMPTY_STRING);
+                return getFormattedString(DESC_FORMAT, formattedDesc);
             }
-            return getFormattedString(DESC_FORMAT, desc);
         }
     }
 
@@ -202,7 +204,8 @@ public class SdlSchemaStringGenerator {
     private static String createInputValues(Type type) {
         List<String> inputFields = new ArrayList<>();
         for (InputValue inputField : type.getInputFields()) {
-            inputFields.add(getFormattedString(INPUT_FIELD_FORMAT, inputField.getName(), createArgType(inputField)));
+            inputFields.add(getFormattedString(INPUT_FIELD_FORMAT, createFieldDescription(inputField.getDescription()),
+                    inputField.getName(), createArgType(inputField)));
         }
         return getFormattedString(FIELD_BLOCK_FORMAT, String.join(LINE_SEPARATOR, inputFields));
     }
@@ -227,7 +230,7 @@ public class SdlSchemaStringGenerator {
                 args.add(getFormattedString(ARGS_VALUE_FORMAT, createArgDescription(arg.getDescription()),
                         DOUBLE_INDENTATION, arg.getName(), createArgType(arg)));
             }
-            return getFormattedString(ARGS_FORMAT, LINE_SEPARATOR, String.join(COMMA_SIGN + LINE_SEPARATOR, args),
+            return getFormattedString(ARGS_FORMAT, LINE_SEPARATOR, String.join(LINE_SEPARATOR, args),
                     LINE_SEPARATOR, INDENTATION);
         } else {
             for (InputValue arg : inputValues) {
@@ -269,29 +272,28 @@ public class SdlSchemaStringGenerator {
     }
 
     private static String createFieldDescription(String description) {
-        if (description == null || description.isEmpty()) {
+        if (description == null) {
             return EMPTY_STRING;
         } else {
-            String desc;
-            String[] lines = description.split(LINE_SEPARATOR);
-            if (lines.length > 1) {
-                desc = getFormattedString(BLOCK_STRING_FORMAT, INDENTATION, INDENTATION,
-                        String.join(LINE_SEPARATOR + INDENTATION, lines), INDENTATION);
+            String[] lines = removeLeadingNewLines(description).split(LINE_SEPARATOR);
+            if (lines.length == 1) {
+                return getFormattedString(DESC_FORMAT, getFormattedString(DOCUMENT_FORMAT, INDENTATION, lines[0]));
             } else {
-                desc = getFormattedString(DOCUMENT_FORMAT, INDENTATION, description);
+                String formattedDesc = getFormattedString(BLOCK_STRING_FORMAT, INDENTATION, INDENTATION,
+                        String.join(LINE_SEPARATOR + INDENTATION, lines), INDENTATION);
+                return getFormattedString(DESC_FORMAT, formattedDesc);
             }
-            return getFormattedString(DESC_FORMAT, desc);
         }
     }
 
     private static String createArgDescription(String description) {
-        if (description == null || description.isEmpty()) {
+        if (description == null) {
             return EMPTY_STRING;
         } else {
-            String[] lines = description.split(LINE_SEPARATOR);
+            String[] lines = removeLeadingNewLines(description).split(LINE_SEPARATOR);
             if (lines.length == 1) {
                 return getFormattedString(DESC_FORMAT,
-                        getFormattedString(DOCUMENT_FORMAT, DOUBLE_INDENTATION, description));
+                        getFormattedString(DOCUMENT_FORMAT, DOUBLE_INDENTATION, lines[0]));
             } else {
                 String formattedDesc = getFormattedString(BLOCK_STRING_FORMAT, DOUBLE_INDENTATION, DOUBLE_INDENTATION,
                         String.join(LINE_SEPARATOR + DOUBLE_INDENTATION, lines), DOUBLE_INDENTATION);
@@ -372,5 +374,13 @@ public class SdlSchemaStringGenerator {
 
     private static String getFormattedString(String format, String... args) {
         return String.format(format, (Object[]) args);
+    }
+
+    private static String removeLeadingNewLines(String description) {
+        int i = 0;
+        while (i < description.length() && String.valueOf(description.charAt(i)).equals(LINE_SEPARATOR)) {
+            i++;
+        }
+        return description.substring(i);
     }
 }
