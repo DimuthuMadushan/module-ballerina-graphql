@@ -62,7 +62,7 @@ ballerina {
     packageOrganization = packageOrg
     module = packageName
     langVersion = ballerinaLangVersion
-    testCoverageParam = ""
+    testCoverageParam = "--code-coverage --includes=io.ballerina.stdlib.graphql.*:ballerina.graphql*"
 }
 
 task updateTomlFiles {
