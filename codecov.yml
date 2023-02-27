@@ -3,8 +3,7 @@ fixes:
 
 ignore:
     - "ballerina-tests"
-    - "compiler-plugin-tests"
-    - "compiler-plugin"
+ chompiler-plugin"
     - "commons"
 
 coverage:
