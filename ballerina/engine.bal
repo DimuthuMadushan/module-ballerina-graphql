@@ -265,7 +265,8 @@ isolated class Engine {
                 }
             }
         }
-        ResponseGenerator responseGenerator = new (self, context, fieldType, 'field.getPath().clone());
+        ResponseGenerator responseGenerator = new (self, context, fieldType, 'field.getPath().clone(),
+                                                   operationType == parser:OPERATION_MUTATION);
         return responseGenerator.getResult(fieldValue, fieldNode);
     }
 
@@ -361,7 +362,7 @@ isolated class Engine {
         'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
     } external;
 
-    isolated function getInterceptorName(readonly & Interceptor interceptor) returns string = @java:Method {
+    isolated function getInterceptorName(Interceptor interceptor) returns string = @java:Method {
         'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
     } external;
 }
