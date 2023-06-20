@@ -1,3 +1,4 @@
+import ballerina/http;
 import ballerina/test;
 
 @test:Config {
@@ -91,6 +92,39 @@ function createRepository() returns error? {
         ],
         "data": null
     };
+    json actualResult = check testClient->execute(query);
+    test:assertEquals(expectedResult, actualResult);
+}
+
+@test:Mock {
+    functionName: "initRestClient"
+}
+function initMockRestClient() returns http:Client|error => test:mock(http:Client);
+
+@test:Config {
+    groups: ["mutation"],
+    enable: false
+}
+function createRepositoryWithMockClient() returns error? {
+    string repoName = "Test-Repo";
+    string query = string `mutation {createRepository(createRepoInput: {name: "${repoName}"}) {name} }`;
+    GitHubRepository expectedResult = {
+        id: 1,
+        name: repoName,
+        'fork: false,
+        created_at: "2020-10-10T10:10:10Z",
+        updated_at: "2020-10-10T10:10:10Z",
+        language: "Ballerina",
+        has_issues: false,
+        forks_count: 5,
+        open_issues_count: 9,
+        visibility: "Public",
+        forks: 7,
+        open_issues: 3,
+        watchers: 55,
+        default_branch: "master"
+    };
+    test:prepare(githubRestClient).when("post").withArguments(["/user/repos", {name: repoName}]).thenReturn(expectedResult);
     json actualResult = check testClient->execute(query);
     test:assertEquals(expectedResult, actualResult);
 }

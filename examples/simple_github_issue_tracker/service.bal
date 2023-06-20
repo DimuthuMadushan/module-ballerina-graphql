@@ -22,6 +22,9 @@ import simple_github_issue_tracker.github_gql_client;
 configurable string authToken = ?;
 configurable string owner = ?;
 
+final http:Client githubRestClient = check initRestClient();
+final github_gql_client:GraphqlClient githubClient = check initGithubClient();
+
 @graphql:ServiceConfig {
     cors: {
         allowOrigins: ["*"]
@@ -31,13 +34,7 @@ configurable string owner = ?;
     }
 }
 service /graphql on new graphql:Listener(9090) {
-
-    final http:Client githubRestClient;
-    final github_gql_client:GraphqlClient githubClient;
-
     function init() returns error? {
-        self.githubRestClient = check new ("https://api.github.com", {auth: {token: authToken}});
-        self.githubClient = check new ({auth: {token: authToken}}, "https://api.github.com/graphql");
         io:println(string `💃 Server ready at http://localhost:9090/graphql`);
         io:println(string `Access the GraphiQL UI at http://localhost:9090/graphiql`);
     }
@@ -46,7 +43,7 @@ service /graphql on new graphql:Listener(9090) {
     # 
     # + return - GitHub repository list
     resource function get user() returns User|error {
-        GitHubUser user = check self.githubRestClient->/user;
+        GitHubUser user = check githubRestClient->/user;
         return transformGitHubUser(user);
     }
 
@@ -54,7 +51,7 @@ service /graphql on new graphql:Listener(9090) {
     # 
     # + return - GitHub repository list
     resource function get repositories() returns Repository[]|error {
-        GitHubRepository[] repositories = check self.githubRestClient->/users/[owner]/repos;
+        GitHubRepository[] repositories = check githubRestClient->/users/[owner]/repos;
         return transformGitHubRepositories(repositories);
     }
 
@@ -63,7 +60,7 @@ service /graphql on new graphql:Listener(9090) {
     # + repositoryName - Repository name
     # + return - GitHub repository
     resource function get repository(string repositoryName) returns Repository|error {
-        GitHubRepository repository = check self.githubRestClient->/repos/[owner]/[repositoryName];
+        GitHubRepository repository = check githubRestClient->/repos/[owner]/[repositoryName];
         return transformGitHubRepository(repository);
     }
 
@@ -75,7 +72,7 @@ service /graphql on new graphql:Listener(9090) {
     # + return - Repository branches
     resource function get branches(int perPageCount, string repositoryName, string username)
             returns Branch?[]?|error {
-        github_gql_client:GetBranchesResponse branches = check self.githubClient->getBranches(perPageCount,
+        github_gql_client:GetBranchesResponse branches = check githubClient->getBranches(perPageCount,
             repositoryName, username);
         return transformGetBranchesResponse(branches).repository.refs.nodes;
     }
@@ -85,7 +82,7 @@ service /graphql on new graphql:Listener(9090) {
     # + createRepoInput - Represent create repository input payload
     # + return - GitHub repository or an error
     remote function createRepository(CreateRepositoryInput createRepoInput) returns Repository|error {
-        GitHubRepository repository = check self.githubRestClient->/user/repos.post(createRepoInput);
+        GitHubRepository repository = check githubRestClient->post("/user/repos", createRepoInput);
         return transformGitHubRepository(repository);
     }
 
@@ -95,7 +92,7 @@ service /graphql on new graphql:Listener(9090) {
     # + repositoryName - Repository name
     # + return - GitHub issue
     remote function createIssue(CreateIssueInput createIssueInput, string repositoryName) returns Issue|error {
-        Issue issue = check self.githubRestClient->/repos/[owner]/[repositoryName]/issues.post(createIssueInput);
+        Issue issue = check githubRestClient->/repos/[owner]/[repositoryName]/issues.post(createIssueInput);
         check produceIssue(issue, repositoryName);
         return issue;
     }
