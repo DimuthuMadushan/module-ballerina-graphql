@@ -129,7 +129,7 @@ isolated function getInterceptorConfig(readonly & Interceptor interceptor) retur
 
 isolated function getCacheConfig(GraphqlServiceConfig? serviceConfig) returns ServerCacheConfig? {
     if serviceConfig is GraphqlServiceConfig {
-        if serviceConfig.cacheConfig is ServerCacheConfig && (<ServerCacheConfig>serviceConfig.cacheConfig).enabled {
+        if serviceConfig.cacheConfig is ServerCacheConfig {
             return serviceConfig.cacheConfig;
         }
     }
