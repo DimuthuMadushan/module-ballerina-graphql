@@ -1,5 +1,5 @@
 [package]
-org = "ballerina"
+org = "dimuthu"
 name = "graphql_tests"
 version = "1.11.3"
 
