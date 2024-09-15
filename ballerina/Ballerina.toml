@@ -21,6 +21,6 @@ path = "../native/build/libs/graphql-native-1.11.3-SNAPSHOT.jar"
 
 [[platform.java17.dependency]]
 groupId = "io.ballerina.stdlib"
-artifactId = "graphql-commons"
+artifactId = "dimuthu-graphql-commons"
 version = "1.11.3"
-path = "../commons/build/libs/graphql-commons-1.11.3-SNAPSHOT.jar"
+path = "../commons/build/libs/dimuthu-graphql-commons-1.11.3-SNAPSHOT.jar"
