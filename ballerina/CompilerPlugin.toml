@@ -1,6 +1,6 @@
 [plugin]
 id = "graphql-compiler-plugin"
-class = "io.ballerina.stdlib.graphql.compiler.GraphqlCompilerPlugin"
+class = "io.dimuthu.stdlib.graphql.compiler.GraphqlCompilerPlugin"
 
 [[dependency]]
 path = "../compiler-plugin/build/libs/graphql-compiler-plugin-1.11.3-SNAPSHOT.jar"
