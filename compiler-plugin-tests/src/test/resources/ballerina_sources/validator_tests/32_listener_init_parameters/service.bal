@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/http;
 
 listener http:Listener httpListener1 = new(91021);

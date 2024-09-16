@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service /graphql on new graphql:Listener(4000) {
     isolated resource function subscribe events() returns stream<string> {

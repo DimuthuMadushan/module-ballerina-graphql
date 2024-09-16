@@ -15,7 +15,7 @@
 // under the License.
 
 import ballerina/http;
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/lang.runtime;
 
 service /greeting on new http:Listener(9090) {

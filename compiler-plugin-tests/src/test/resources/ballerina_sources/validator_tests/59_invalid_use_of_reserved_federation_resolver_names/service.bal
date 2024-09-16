@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service on new graphql:Listener(4000) {
     resource function get _entities() returns string {

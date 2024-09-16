@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public type Person record {|
     string name;

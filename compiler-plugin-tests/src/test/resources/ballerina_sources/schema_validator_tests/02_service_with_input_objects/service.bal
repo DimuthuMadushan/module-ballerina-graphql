@@ -1,4 +1,4 @@
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public type Person record {
     string name;

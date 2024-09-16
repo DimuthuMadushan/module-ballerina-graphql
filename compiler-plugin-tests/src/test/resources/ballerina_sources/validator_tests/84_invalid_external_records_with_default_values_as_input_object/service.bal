@@ -16,7 +16,7 @@
 
 import test_package.types;
 
-import ballerina/graphql;
+import dimuthu/graphql;
 
 type InputObject2 record {|
     int val2 = 2;

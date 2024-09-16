@@ -16,8 +16,8 @@
  * under the License.
  */
 
-module io.ballerina.stdlib.graphql.runtime {
+module io.dimuthu.stdlib.graphql.runtime {
     requires io.ballerina.runtime;
     requires io.ballerina.stdlib.constraint;
-    requires io.ballerina.stdlib.graphql.commons;
+    requires io.dimuthu.stdlib.graphql.commons;
 }

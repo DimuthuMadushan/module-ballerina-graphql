@@ -75,7 +75,7 @@ public isolated class DefaultDataLoader {
     # + 'type - The type of the result
     # + return - The result for the key on success, error on failure
     public isolated function get(anydata key, typedesc<anydata> 'type = <>) returns 'type|error = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.DataLoader"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.DataLoader"
     } external;
 
     private isolated function processGet(anydata key, typedesc<anydata> 'type) returns anydata|error {

@@ -35,7 +35,7 @@ isolated class ExecutorVisitor {
     }
 
     isolated function initializeDataMap() = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.ExecutorVisitor"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.ExecutorVisitor"
     } external;
 
     public isolated function visitDocument(parser:DocumentNode documentNode, anydata data = ()) {}
@@ -185,18 +185,18 @@ isolated class ExecutorVisitor {
     }
 
     private isolated function setResult(any|error result) = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.EngineUtils"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.EngineUtils"
     } external;
 
     private isolated function getResult() returns any|error = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.EngineUtils"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.EngineUtils"
     } external;
 
     private isolated function addData(string key, anydata value) = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.ExecutorVisitor"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.ExecutorVisitor"
     } external;
 
     private isolated function getDataMap() returns Data = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.ExecutorVisitor"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.ExecutorVisitor"
     } external;
 }

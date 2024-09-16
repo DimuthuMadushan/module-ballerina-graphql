@@ -372,14 +372,14 @@ isolated class NewsStream {
 
 ### Implementing the GraphQL API
 
-Now the GraphQL API can be implemented since all the other types/methods are defined. To define a GraphQL service, the `ballerina/graphql` package is used. It is a part of the Ballerina library. Therefore, no additional work is needed.
+Now the GraphQL API can be implemented since all the other types/methods are defined. To define a GraphQL service, the `dimuthu/graphql` package is used. It is a part of the Ballerina library. Therefore, no additional work is needed.
 
 Following code snippet shows how to define a GraphQL service in Ballerina. Remove the code in the `service.bal` and use this code to implement the GraphQL service.
 
 Ballerina GraphQL comes with a built-in GraphiQL client for testing purposes, which can be enabled through `graphql:ServiceConfig`. It is enabled via a `configurable` variable `ENABLE_GRAPHIQL`. Value of this variable is provided in the `Config.toml` file in the project.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 configurable boolean ENABLE_GRAPHIQL = ?;
 

@@ -1,4 +1,4 @@
-import ballerina/graphql;
+import dimuthu/graphql;
 
 # Service attached to a GraphQL listener exposes a GraphQL service on the provided port.
 service /graphql2 on new graphql:Listener(4001) {

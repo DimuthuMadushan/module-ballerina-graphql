@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service on new graphql:Listener(9090) {
     resource function get authors(int[] ids) returns Author[] {

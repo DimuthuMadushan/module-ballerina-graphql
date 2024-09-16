@@ -86,7 +86,7 @@ public isolated class Context {
     # + key - The key for the DataLoader to be registered
     # + dataloader - The DataLoader instance to be registered
     public isolated function registerDataLoader(string key, dataloader:DataLoader dataloader) = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     # Retrieves a DataLoader instance using the given key from the GraphQL context.
@@ -94,7 +94,7 @@ public isolated class Context {
     # + key - The key corresponding to the required DataLoader instance
     # + return - The DataLoader instance if the key is present in the context otherwise panics
     public isolated function getDataLoader(string key) returns dataloader:DataLoader = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     # Remove cache entries related to the given path.
@@ -140,11 +140,11 @@ public isolated class Context {
     }
 
     isolated function setFileInfo(map<Upload|Upload[]> fileInfo) = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.EngineUtils"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.EngineUtils"
     } external;
 
     isolated function getFileInfo() returns map<Upload|Upload[]> = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.EngineUtils"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.EngineUtils"
     } external;
 
     public isolated function resolve(Field 'field) returns anydata {
@@ -222,11 +222,11 @@ public isolated class Context {
     }
 
     isolated function addUnresolvedPlaceholder(string uuid, Placeholder placeholder) = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function intializeContext() = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function getPlaceholderValue(string uuid) returns anydata {
@@ -235,23 +235,23 @@ public isolated class Context {
     }
 
     isolated function getPlaceholder(string uuid) returns Placeholder = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function getUnresolvedPlaceholderCount() returns int = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function getUnresolvedPlaceholderNodeCount() returns int = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function decrementUnresolvedPlaceholderNodeCount() = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function hasPlaceholders() returns boolean = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function clearDataLoadersCachesAndPlaceholders() {
@@ -265,23 +265,23 @@ public isolated class Context {
     }
 
     isolated function clearPlaceholders() = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function getDataloaderIds() returns string[] = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function getUnresolvedPlaceholders() returns Placeholder[] = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function removeAllUnresolvedPlaceholders() = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 
     isolated function decrementUnresolvedPlaceholderCount() = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Context"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
     } external;
 }
 

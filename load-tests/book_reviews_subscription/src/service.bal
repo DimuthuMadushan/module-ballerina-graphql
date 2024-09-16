@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 import book_reviews_subscription.datasource as ds;
 import xlibb/pubsub;
 

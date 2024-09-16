@@ -64,7 +64,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId project.group
-            artifactId "graphql-commons"
+            artifactId "dimuthu-graphql-commons"
             version = project.version
             artifact jar
         }

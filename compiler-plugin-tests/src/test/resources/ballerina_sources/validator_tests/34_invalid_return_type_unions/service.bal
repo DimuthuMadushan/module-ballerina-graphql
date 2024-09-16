@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service graphql:Service on new graphql:Listener(4000) {
     resource function get details() returns FirstName|Age|CivilStatus|error {

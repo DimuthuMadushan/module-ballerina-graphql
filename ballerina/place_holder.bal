@@ -38,11 +38,11 @@ isolated class Placeholder {
 
     isolated function setField(Field 'field) = @java:Method {
         name: "setFieldValue",
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Placeholder"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Placeholder"
     } external;
 
     isolated function getField() returns Field = @java:Method {
         name: "getFieldValue",
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Placeholder"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Placeholder"
     } external;
 };

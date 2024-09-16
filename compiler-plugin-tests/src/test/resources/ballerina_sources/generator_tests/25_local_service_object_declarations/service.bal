@@ -15,7 +15,7 @@
 // under the License.
 
 import ballerina/lang.runtime;
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public function main() returns error? {
     graphql:Service localService1 = service object {

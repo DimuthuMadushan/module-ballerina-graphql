@@ -55,7 +55,7 @@ public isolated client class Client {
                                              map<string|string[]>? headers = (),
                                              typedesc<GenericResponse|record{}|json> targetType = <>)
                                              returns targetType|ClientError = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.client.QueryExecutor",
+        'class: "io.dimuthu.stdlib.graphql.runtime.client.QueryExecutor",
         name: "executeWithType"
     } external;
 
@@ -98,7 +98,7 @@ public isolated client class Client {
                                      map<string|string[]>? headers = (),
                                      typedesc<GenericResponseWithErrors|record{}|json> targetType = <>)
                                      returns targetType|ClientError = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.client.QueryExecutor",
+        'class: "io.dimuthu.stdlib.graphql.runtime.client.QueryExecutor",
         name: "execute"
     } external;
 

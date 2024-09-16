@@ -15,7 +15,7 @@
 // under the License.
 
 import ballerina/lang.runtime;
-import ballerina/graphql;
+import dimuthu/graphql;
 
 # Graphql service definition
 graphql:Service backendService = service object {

@@ -15,7 +15,7 @@
 // under the License.
 
 import ballerina/uuid;
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service graphql:Service on new graphql:Listener(4000) {
     resource function get student(@graphql:ID int id) returns Student1 {

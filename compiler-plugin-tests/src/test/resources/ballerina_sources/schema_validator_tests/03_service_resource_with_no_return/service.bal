@@ -1,4 +1,4 @@
-import ballerina/graphql;
+import dimuthu/graphql;
 
 
 isolated service on new graphql:Listener(9000) {

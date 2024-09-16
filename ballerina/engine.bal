@@ -420,55 +420,55 @@ isolated class Engine {
     }
 
     isolated function addService(Service s) = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.EngineUtils"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.EngineUtils"
     } external;
 
     isolated function getService() returns Service = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.EngineUtils"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.EngineUtils"
     } external;
 
     isolated function getResourceMethod(service object {} serviceObject, string[] path)
     returns handle? = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function getMethod(service object {} serviceObject, string methodName)
     returns handle? = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function executeQueryResource(Context context, service object {} serviceObject, handle resourceMethod,
                                            Field 'field, ResponseGenerator responseGenerator, boolean validation)
     returns any|error = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function executeMutationMethod(Context context, service object {} serviceObject,
                                             Field 'field, ResponseGenerator responseGenerator, boolean validation) returns any|error = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function executeSubscriptionResource(Context context, service object {} serviceObject,
                                                   Field 'field, ResponseGenerator responseGenerator, boolean validation) returns any|error = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function executeInterceptor(readonly & Interceptor interceptor, Field fieldNode, Context context)
     returns any|error = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function getInterceptorName(readonly & Interceptor interceptor) returns string = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function hasPrefetchMethod(service object {} serviceObject, string prefetchMethodName)
     returns boolean = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 
     isolated function executePrefetchMethod(Context context, service object {} serviceObject,
         handle prefetchMethodHandle, Field 'field) = @java:Method {
-        'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
     } external;
 }

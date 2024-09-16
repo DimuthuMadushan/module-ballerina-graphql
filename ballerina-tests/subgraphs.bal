@@ -13,8 +13,8 @@
 // KIND, either express or implied.  See the License for the
 // specific language gove
 
-import ballerina/graphql;
-import ballerina/graphql.subgraph;
+import dimuthu/graphql;
+import dimuthu/graphql.subgraph;
 
 @subgraph:Subgraph
 service /subgraph on new graphql:Listener(9088) {

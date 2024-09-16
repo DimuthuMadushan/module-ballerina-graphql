@@ -412,41 +412,41 @@ isolated function getGraphiqlService(GraphqlServiceConfig? serviceConfig, string
 }
 
 isolated function attachHttpServiceToGraphqlService(Service s, HttpService httpService) = @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function getHttpServiceFromGraphqlService(Service s) returns HttpService? =
 @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function attachGraphiqlServiceToGraphqlService(Service s, HttpService httpService) = @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function getGraphiqlServiceFromGraphqlService(Service s) returns HttpService? =
 @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function validateGraphiqlPath(string path) returns Error? = @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function getHtmlContentFromResources(string graphqlUrl, string? subscriptionUrl = ())
     returns string|Error = @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function getBasePath(string[]|string gqlBasePath) returns string = @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function attachWebsocketServiceToGraphqlService(Service s, UpgradeService wsService) = @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;
 
 isolated function getWebsocketServiceFromGraphqlService(Service s) returns UpgradeService? =
 @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.ListenerUtils"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.ListenerUtils"
 } external;

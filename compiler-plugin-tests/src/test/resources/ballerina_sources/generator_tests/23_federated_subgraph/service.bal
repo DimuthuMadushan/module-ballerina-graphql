@@ -14,8 +14,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
-import ballerina/graphql.subgraph as sgl;
+import dimuthu/graphql;
+import dimuthu/graphql.subgraph as sgl;
 
 @sgl:Subgraph
 service on new graphql:Listener(4001) {

@@ -223,7 +223,7 @@ This section describes the components of the Ballerina GraphQL package. To use t
 ###### Example: Importing the GraphQL Package
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 ```
 
 ### 2.1 Listener
@@ -1183,7 +1183,7 @@ The Ballerina GraphQL package uses the Ballerina's in-built `@deprecated` annota
 The following code shows how to mark a field and an enum value as deprecated with the deprecation reason.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service on new graphql:Listener(9090) {
 
@@ -3082,7 +3082,7 @@ The service interceptors are applied to all the resolvers in the GraphQL service
 ###### Example: GraphQL Service Interceptor
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/log;
 
 readonly service class ServiceInterceptor {
@@ -3119,7 +3119,7 @@ The field interceptors are applied to a specific resolver in the GraphQL service
 ###### Example: GraphQL Field Interceptor
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/log;
 
 readonly service class FieldInterceptor {
@@ -3258,7 +3258,7 @@ service on new graphql:Listener(9090) {
 The Ballerina GraphQL module provides the capability to expose a `graphql:Service` as a [federation2 subgraph](https://www.apollographql.com/docs/federation/subgraph-spec). To convert a Ballerina GraphQL service into a federation2 subgraph, the `graphql.subgraph` submodule must be imported.
 
 ```ballerina
-import ballerina/graphql.subgraph;
+import dimuthu/graphql.subgraph;
 ```
 
 >**Note:** The current implementation of the subgraph only supports dynamic schema composition through introspection.
@@ -3620,8 +3620,8 @@ Bringing everything together, the subsequent examples demonstrate how to engage 
 ###### Example: Utilizing a DataLoader in a GraphQL Service
 
 ```ballerina
-import ballerina/graphql;
-import ballerina/graphql.dataloader;
+import dimuthu/graphql;
+import dimuthu/graphql.dataloader;
 import ballerina/http;
 
 @graphql:ServiceConfig {
@@ -3671,8 +3671,8 @@ In the given example, both the `books` resource function and the `preBooks` func
 ###### Example: Utilizing Multiple DataLoaders in a GraphQL Service
 
 ```ballerina
-import ballerina/graphql;
-import ballerina/graphql.dataloader;
+import dimuthu/graphql;
+import dimuthu/graphql.dataloader;
 import ballerina/http;
 
 @graphql:ServiceConfig {
@@ -3791,7 +3791,7 @@ public isolated function invalidateAll() returns error? {}
 ###### Example: Operation-level Cache Enabling and Invalidation
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 @graphql:ServiceConfig {
     cacheConfig: {
@@ -3824,7 +3824,7 @@ In this example, caching is enabled at the operation level. Therefore, the field
 ###### Example: Field-level Cache Enabling and Invalidation
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 type Friend record {|
     readonly string name;
@@ -3898,7 +3898,7 @@ In this example, GraphQL field-level caching is enabled for the `friends` field 
 ###### Example: Overrides Operation-level Cache Config
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 @graphql:ServiceConfig {
     cacheConfig: {

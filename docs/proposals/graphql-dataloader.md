@@ -20,7 +20,7 @@ The N+1 problem can be exemplified in a scenario involving authors and their boo
 This results in N+1 queries being executed, where N represents the number of authors, leading to increased overhead and potential performance issues. Following is a GraphQL book catalog application written in Ballerina which susceptible to N +1 problem
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/sql;
 import ballerina/io;
 import ballerinax/java.jdbc;
@@ -212,7 +212,7 @@ The following section demonstrates the usage of DataLoader in Ballerina GraphQL.
 In the previous Book Catalog Application example `SELECT * FROM books WHERE author = ${authorId}` was executed each time for N = 10 authors. To batch these database calls to a single request we need to use a DataLoader at the books field. The following code block demonstrates the changes made to the books field and Author service class.
 
 ```ballerina
-import ballerina/graphql.dataloader;
+import dimuthu/graphql.dataloader;
 
 isolated distinct service class Author {
     private final readonly & AuthorRow author;

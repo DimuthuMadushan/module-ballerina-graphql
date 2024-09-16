@@ -154,5 +154,5 @@ isolated function getFieldCacheConfig(service object {} serviceObj, parser:RootO
 
 isolated function getResourceAnnotation(service object {} serviceObject, parser:RootOperationType operationType,
         string[] path, string methodName) returns GraphqlResourceConfig? = @java:Method {
-    'class: "io.ballerina.stdlib.graphql.runtime.engine.Engine"
+    'class: "io.dimuthu.stdlib.graphql.runtime.engine.Engine"
 } external;

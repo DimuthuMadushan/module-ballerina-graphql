@@ -15,7 +15,7 @@
 // under the License.
 
 import ballerina/lang.runtime;
-import ballerina/graphql;
+import dimuthu/graphql;
 
 class TestService {
     private graphql:Service fieldService1 = service object {

@@ -15,7 +15,7 @@
 // under the License.
 
 import ballerina/lang.runtime;
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public distinct service isolated class Person {
     private final string name;

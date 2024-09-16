@@ -14,8 +14,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
-import ballerina/graphql.dataloader;
+import dimuthu/graphql;
+import dimuthu/graphql.dataloader;
 import ballerina/lang.runtime;
 
 public type PeopleService StudentService|TeacherService;

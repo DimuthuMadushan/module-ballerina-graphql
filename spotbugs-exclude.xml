@@ -2,27 +2,27 @@
 <FindBugsFilter>
     <Match>
         <And>
-            <Class name="io.ballerina.stdlib.graphql.runtime.engine.Engine" />
+            <Class name="io.dimuthu.stdlib.graphql.runtime.engine.Engine" />
             <Bug pattern="BC_UNCONFIRMED_CAST" />
         </And>
     </Match>
     <Match>
         <And>
-            <Class name="io.ballerina.stdlib.graphql.runtime.utils.Utils" />
+            <Class name="io.dimuthu.stdlib.graphql.runtime.utils.Utils" />
             <Method name = "isFileUpload" />
             <Bug pattern="BC_UNCONFIRMED_CAST" />
         </And>
     </Match>
     <Match>
         <And>
-            <Class name="io.ballerina.stdlib.graphql.compiler.Utils" />
+            <Class name="io.dimuthu.stdlib.graphql.compiler.Utils" />
             <Method name = "getSchemaObject" />
             <Bug pattern="BC_UNCONFIRMED_CAST" />
         </And>
     </Match>
     <Match>
         <And>
-            <Class name="io.ballerina.stdlib.graphql.runtime.engine.ExecutionCallback" />
+            <Class name="io.dimuthu.stdlib.graphql.runtime.engine.ExecutionCallback" />
             <Method name = "notifyFailure" />
             <Bug pattern="DM_EXIT" />
         </And>
@@ -31,25 +31,35 @@
         <Bug pattern="EI_EXPOSE_REP, EI_EXPOSE_REP2" />
     </Match>
     <Match>
-        <Class name="io.ballerina.stdlib.graphql.runtime.engine.Engine" />
+        <Class name="io.dimuthu.stdlib.graphql.runtime.engine.Engine" />
         <Method name = "createSchema" />
         <Bug pattern="DCN_NULLPOINTER_EXCEPTION" />
     </Match>
     <Match>
-        <Class name="io.ballerina.stdlib.graphql.commons.types.Directive" />
+        <Class name="io.dimuthu.stdlib.graphql.commons.types.Directive" />
         <Bug pattern="MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR" />
     </Match>
     <Match>
-        <Class name="io.ballerina.stdlib.graphql.commons.types.Directive" />
+        <Class name="io.dimuthu.stdlib.graphql.commons.types.Directive" />
         <Bug pattern="EI_EXPOSE_REP" />
     </Match>
     <Match>
-        <Class name="io.ballerina.stdlib.graphql.compiler.schema.generator.GraphqlSourceModifier" />
+        <Class name="generator.schema.io.dimuthu.stdlib.graphql.compiler.GraphqlSourceModifier" />
         <Method name = "getEntityResolver" />
         <Bug pattern="DCN_NULLPOINTER_EXCEPTION" />
     </Match>
     <Match>
-        <Class name="io.ballerina.stdlib.graphql.compiler.schema.generator.GraphqlSourceModifier" />
+        <Class name="generator.schema.io.dimuthu.stdlib.graphql.compiler.GraphqlSourceModifier" />
+        <Method name = "getServiceResolver" />
+        <Bug pattern="DCN_NULLPOINTER_EXCEPTION" />
+    </Match>
+    <Match>
+        <Class name="io.dimuthu.stdlib.graphql.compiler.schema.generator.GraphqlSourceModifier" />
+        <Method name = "getEntityResolver" />
+        <Bug pattern="DCN_NULLPOINTER_EXCEPTION" />
+    </Match>
+    <Match>
+        <Class name="io.dimuthu.stdlib.graphql.compiler.schema.generator.GraphqlSourceModifier" />
         <Method name = "getServiceResolver" />
         <Bug pattern="DCN_NULLPOINTER_EXCEPTION" />
     </Match>

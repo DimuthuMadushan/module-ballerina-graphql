@@ -16,10 +16,10 @@
  * under the License.
  */
 
-module io.ballerina.stdlib.graphql.commons {
+module io.dimuthu.stdlib.graphql.commons {
     requires io.ballerina.lang;
     requires io.ballerina.parser;
     requires io.ballerina.tools.api;
-    exports io.ballerina.stdlib.graphql.commons.utils;
-    exports io.ballerina.stdlib.graphql.commons.types;
+    exports io.dimuthu.stdlib.graphql.commons.utils;
+    exports io.dimuthu.stdlib.graphql.commons.types;
 }

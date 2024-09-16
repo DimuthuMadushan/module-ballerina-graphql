@@ -1,5 +1,5 @@
 fixes:
-    - "ballerina/graphql/**/::../ballerina/"
+    - "dimuthu/graphql/**/::../ballerina/"
 
 ignore:
     - "ballerina-tests"

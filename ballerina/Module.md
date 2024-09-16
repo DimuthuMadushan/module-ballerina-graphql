@@ -12,14 +12,14 @@ The `graphql:Listener` is used to listening to a given IP/Port. To create a `gra
 
 #### Create a standalone `graphql:Listener`
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 listener graphql:Listener graphqlListener = new(4000);
 ```
 
 #### Create a `graphql:Listener` using an `http:Listener`
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/http;
 
 listener http:Listener httpListener = check new(4000);
@@ -31,7 +31,7 @@ When initializing the Ballerina GraphQL listener, a set of additional configurat
 The configurations that can be passed for this are defined in the `graphql:ListenerConfiguration` record.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 listener graphql:Listener graphqlListener = new (4000, timeout = 10, secureSocket = { key: { path: <KEYSTORE_PATH>, password: <PASSWORD>}});
 ```
@@ -42,7 +42,7 @@ The Ballerina GraphQL service represents the GraphQL schema. When a service is a
 The GraphQL services are exposed through a single endpoint. The path of the GraphQL service endpoint can be provided via the service path of the GraphQL service. The endpoint of the following Ballerina GraphQL service will be `/graphql`.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service /graphql on new graphql:Listener(4000) {
     // ...
@@ -54,7 +54,7 @@ The GraphQL service endpoint URL will be `<host>:<port>/graphql`.
 Alternatively, a Ballerina graphql service can not have a path, in which case the endpoint will be the host URL and the port as the following example.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service on new graphql:Listener(4000) {
     // ...
@@ -73,7 +73,7 @@ When a `resource` function is defined inside a GraphQL service with the `get` ac
 The accessor of the `resource` function should always be `get` for a field to be considered as a `Query` field. The `resource` function name will become the name of the particular field in the GraphQL schema. The return type of the `resource` function will be the type of the corresponding field.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service graphql:Service /graphql on new graphql:Listener(4000) {
     resource function get greeting(string name) returns string {
@@ -108,7 +108,7 @@ When a `remote` function is defined inside a GraphQL service, the schema will ha
 For example, consider the following service that has a `Person` record named `profile`. It has a `Query` field named `profile`, which returns the `Person` record. It also has two `remote` functions named `updateName` and `updateCity`, which are used as mutations.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public type Person record {|
     string name;
@@ -213,7 +213,7 @@ The `resource` functions that belongs to `Subscription` type must return a strea
 
 The return type
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service graphql:Service /graphql on new graphql:Listener(4000) {
     resource function subscribe messages() returns stream<string> {
@@ -276,7 +276,7 @@ service graphql:Service /graphql on new graphql:Listener(4000) {
 When a maximum query depth is provided, all the queries exceeding that limit will be rejected at the validation phase and will not be executed.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 @graphql:ServiceConfig {
     maxQueryDepth: 2
@@ -337,7 +337,7 @@ Following are examples for providing the context init function.
 
 ##### Provide the init function directly
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/http;
 
 @graphql:ServiceConfig {
@@ -354,7 +354,7 @@ service on new graphql:Listener(4000) {
 
 ##### Provide the init function as a function pointer
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 import ballerina/http;
 
 isolated function initContext(http:RequestContext requestContext, http:Request request) returns graphql:Context|error {
@@ -458,7 +458,7 @@ Result:
 When a `resource` or a `remote` function returns an `enum` value, it will be mapped to a GraphQL `ENUM` type.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public enum Color {
     RED,
@@ -563,7 +563,7 @@ When a `resource` function returns a service type, the service type is mapped to
 When a service type is returned from a `graphql:Service`, the returning service type should also follow the rules of the `graphql:Service` explained above.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service graphql:Service /graphql on new graphql:Listener(4000) {
     resource function get profile() returns Person {
@@ -759,7 +759,7 @@ The Ballerina GraphQL service can return a union of distinct service types. This
 > **Note:** Since Ballerina supports union types by nature, directly returning a union type is also allowed (but not recommended). The recommended way is to define a union type name separately and then use that type name as shown in the following example. If a union type is returned directly without providing a type name (`returns T1|T2|T3`), the type name will be `T1_T2_T3`.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public type StudentOrTeacher Student|Teacher;
 
@@ -945,7 +945,7 @@ A `resource` function inside a GraphQL service can have hierarchical paths.
 When a hierarchical path is present, each level of the hierarchical path maps to the GraphQL field of the same name, and the type of that field will be mapped to an `OBJECT` type with the same name.
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service graphql:Service /graphql on new graphq:Listener(4000) {
     resource function profile/name/first() returns string {

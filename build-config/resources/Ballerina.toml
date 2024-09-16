@@ -1,5 +1,5 @@
 [package]
-org = "ballerina"
+org = "dimuthu"
 name = "graphql"
 version = "@toml.version@"
 authors = ["Ballerina"]
@@ -21,6 +21,6 @@ path = "../native/build/libs/graphql-native-@project.version@.jar"
 
 [[platform.java17.dependency]]
 groupId = "io.ballerina.stdlib"
-artifactId = "graphql-commons"
+artifactId = "graphql-dimuthu-commons"
 version = "@toml.version@"
-path = "../commons/build/libs/graphql-commons-@project.version@.jar"
+path = "../commons/build/libs/graphql-dimuthu-commons-@project.version@.jar"

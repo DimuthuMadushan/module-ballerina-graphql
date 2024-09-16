@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 import test_package.types as types;
 
 service graphql:Service on new graphql:Listener(4000) {

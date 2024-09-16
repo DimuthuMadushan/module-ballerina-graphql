@@ -1,4 +1,4 @@
-import ballerina/graphql;
+import dimuthu/graphql;
 
 public isolated client class GraphqlClient {
     final graphql:Client graphqlClient;

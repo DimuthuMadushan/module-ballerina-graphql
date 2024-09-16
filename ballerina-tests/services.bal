@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql as gql;
+import dimuthu/graphql as gql;
 
 listener gql:Listener graphqlListener = new(9098);
 

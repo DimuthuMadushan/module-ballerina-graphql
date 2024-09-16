@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql;
+import dimuthu/graphql;
 
 readonly service class ServiceInterceptor1 {
     *graphql:Interceptor;

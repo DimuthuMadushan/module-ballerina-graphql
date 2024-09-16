@@ -14,8 +14,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/graphql.subgraph;
-import ballerina/graphql;
+import dimuthu/graphql.subgraph;
+import dimuthu/graphql;
 
 string key = "sku package";
 

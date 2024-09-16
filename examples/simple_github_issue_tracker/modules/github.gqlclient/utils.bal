@@ -1,4 +1,4 @@
-import ballerina/graphql;
+import dimuthu/graphql;
 
 type OperationResponse record {| anydata...; |}|record {| anydata...; |}[]|boolean|string|int|float|();
 

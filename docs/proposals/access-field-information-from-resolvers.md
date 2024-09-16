@@ -58,7 +58,7 @@ With this proposal, we are removing the limitations for the `graphql:Context` an
 ###### Example: Accessing the Field Object
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service on new graphql:Listener(9090) {
     // A resource method that accesses the `graphql:Context` and the `graphql:Field` 
@@ -79,7 +79,7 @@ service on new graphql:Listener(9090) {
 ###### Counter Example: Field Defined in Invalid Locations
 
 ```ballerina
-import ballerina/graphql;
+import dimuthu/graphql;
 
 service on new graphql:Listener(9090) {
     // If the `graphql:Context` is present, it must be the first parameter. 

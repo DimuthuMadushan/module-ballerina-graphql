@@ -36,21 +36,21 @@ rootProject.name = 'graphql'
 
 include ':checkstyle'
 include ':graphql-native'
-include ':graphql-compiler-plugin'
+include ':graphql-dimuthu-compiler-plugin'
 include ':graphql-ballerina'
 include ':graphql-compiler-plugin-tests'
 include ':graphql-ballerina-tests'
 include ':graphql-examples'
-include ':graphql-commons'
+include ':graphql-dimuthu-commons'
 
 project(':checkstyle').projectDir = file("build-config${File.separator}checkstyle")
 project(':graphql-native').projectDir = file("native")
-project(':graphql-compiler-plugin').projectDir = file("compiler-plugin")
+project(':graphql-dimuthu-compiler-plugin').projectDir = file("compiler-plugin")
 project(':graphql-ballerina').projectDir = file("ballerina")
 project(':graphql-compiler-plugin-tests').projectDir = file("compiler-plugin-tests")
 project(':graphql-ballerina-tests').projectDir = file("ballerina-tests")
 project(':graphql-examples').projectDir = file("examples")
-project(':graphql-commons').projectDir = file("commons")
+project(':graphql-dimuthu-commons').projectDir = file("commons")
 
 gradleEnterprise {
    buildScan {
