@@ -22,7 +22,6 @@ import ballerina/lang.value;
 
 # The GraphQL context object used to pass the meta information between resolvers.
 public isolated class Context {
-    private final ErrorDetail[] errors = [];
     private Engine? engine = ();
     private boolean hasFileInfo = false; // This field value changed by setFileInfo method
 
@@ -123,24 +122,17 @@ public isolated class Context {
         return;
     }
 
-    isolated function addError(ErrorDetail err) {
-        lock {
-            self.errors.push(err.clone());
-        }
-    }
+    isolated function addError(ErrorDetail err) = @java:Method {
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
+    } external;
 
-    isolated function addErrors(ErrorDetail[] errs) {
-        readonly & ErrorDetail[] errors = errs.cloneReadOnly();
-        lock {
-            self.errors.push(...errors);
-        }
-    }
+    isolated function addErrors(ErrorDetail[] errs) = @java:Method {
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
+    } external;
 
-    isolated function getErrors() returns ErrorDetail[] {
-        lock {
-            return self.errors.clone();
-        }
-    }
+    isolated function getErrors() returns ErrorDetail[] = @java:Method {
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
+    } external;
 
     isolated function setFileInfo(map<Upload|Upload[]> fileInfo) = @java:Method {
         'class: "io.dimuthu.stdlib.graphql.runtime.engine.EngineUtils"
@@ -170,11 +162,9 @@ public isolated class Context {
         }
     }
 
-    isolated function resetErrors() {
-        lock {
-            self.errors.removeAll();
-        }
-    }
+    isolated function resetErrors() = @java:Method {
+        'class: "io.dimuthu.stdlib.graphql.runtime.engine.Context"
+    } external;
 
     isolated function resolvePlaceholders() {
         self.dispatchDataloaders();

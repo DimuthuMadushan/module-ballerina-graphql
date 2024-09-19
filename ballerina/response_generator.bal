@@ -291,7 +291,7 @@ isolated class ResponseGenerator {
                     ErrorDetail errorDetail = {
                         message: fieldValue.message(),
                         locations: [selection.getLocation()],
-                        path: path.clone()
+                        path: clonedPath
                     };
                     self.context.addError(errorDetail);
                 }
