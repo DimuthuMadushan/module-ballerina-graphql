@@ -106,20 +106,19 @@ isolated class ExecutorVisitor {
     public isolated function visitVariable(parser:VariableNode variableNode, anydata data = ()) {}
 
     isolated function execute(parser:FieldNode fieldNode, parser:RootOperationType operationType) {
+        __Schema schema = self.schema;
         any|error result;
-        __Schema schema;
         Engine engine;
         Context context;
         lock {
             result = self.getResult();
-            schema = self.schema;
             engine = self.engine;
             context = self.context;
         }
         Field 'field = getFieldObject(fieldNode, operationType, schema, engine, result);
 
         anydata resolvedResult = engine.resolve(context, 'field);
-        resolvedResult = resolvedResult is ErrorDetail ? () : resolvedResult.cloneReadOnly();
+        resolvedResult = resolvedResult is ErrorDetail ? () : resolvedResult;
         self.addData(fieldNode.getAlias(), resolvedResult);
     }
 
@@ -172,12 +171,12 @@ isolated class ExecutorVisitor {
             if selection is parser:FieldNode {
                 path.push(selection.getName());
                 self.addData(selection.getAlias(), ());
+                ErrorDetail errorDetail = {
+                    message: err.message(),
+                    locations: [selection.getLocation()],
+                    path: path
+                };
                 lock {
-                    ErrorDetail errorDetail = {
-                        message: err.message(),
-                        locations: [selection.getLocation()],
-                        path: path
-                    };
                     self.context.addError(errorDetail);
                 }
             }
