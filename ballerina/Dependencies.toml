@@ -375,7 +375,7 @@ modules = [
 [[package]]
 org = "dimuthu"
 name = "graphql"
-version = "1.11.4"
+version = "1.11.5"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
