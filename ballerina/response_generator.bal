@@ -190,9 +190,9 @@ isolated class ResponseGenerator {
     isolated function getResultFromService(service object {} serviceObject, parser:FieldNode parentNode,
                                            (string|int)[] path = []) returns anydata {
         Data result = {};
-        if serviceObject is isolated service object {} {
-            return self.executeResourcesParallely(serviceObject, parentNode, path);
-        }
+        // if serviceObject is isolated service object {} {
+        //     return self.executeResourcesParallely(serviceObject, parentNode, path);
+        // }
         foreach parser:SelectionNode selection in parentNode.getSelections() {
             if selection is parser:FieldNode {
                 anydata selectionValue = self.getResultFromObject(serviceObject, selection, path);
