@@ -45,7 +45,12 @@ isolated class ExecutorVisitor {
         if operationNode.getName() != parser:ANONYMOUS_OPERATION {
             path.push(operationNode.getName());
         }
-        if operationNode.getKind() != parser:OPERATION_MUTATION {
+        Engine engine;
+        lock {
+            engine = self.engine;
+        }
+        service object {} serviceObject = engine.getService();
+        if operationNode.getKind() != parser:OPERATION_MUTATION && serviceObject is isolated service object {} {
             map<anydata> dataMap = {[OPERATION_TYPE] : operationNode.getKind(), [PATH] : path};
             return self.visitSelectionsParallelly(operationNode, dataMap.cloneReadOnly());
         }
