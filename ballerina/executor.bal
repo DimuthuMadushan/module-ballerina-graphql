@@ -52,53 +52,56 @@ isolated class Executor {
             map<anydata> dataMap = {[OPERATION_TYPE] : operationNode.getKind(), [PATH] : path};
             data = <Data>self.visitSelectionsParallelly(operationNode, dataMap.cloneReadOnly());
         } else {
-            foreach parser:SelectionNode selection in operationNode.getSelections() {
-                if selection is parser:FieldNode {
-                    path.push(selection.getName());
-                }
-                map<anydata> dataMap = {[OPERATION_TYPE] : operationNode.getKind(), [PATH] : path};
-                Data selectionData = <Data>self.visitSelection(selection, dataMap);
-                foreach [string, anydata] [key, value] in selectionData.entries() {
-                    data[key] = value;
-                }
-            }
+            map<anydata> dataMap = {[OPERATION_TYPE] : operationNode.getKind(), [PATH] : path};
+            data = <Data>self.visitSelections(operationNode.getSelections(), dataMap.cloneReadOnly());
         }
         return self.getOutput(data);
     }
 
-    isolated function visitSelection(parser:SelectionNode selection, anydata data) returns anydata {
-        if selection is parser:FieldNode {
-            return self.visitField(selection, data);
-        } else if selection is parser:FragmentNode {
-            return self.visitFragment(selection, data);
+    isolated function visitSelections(parser:SelectionNode[] selections, anydata data) returns anydata {
+        Data dataRecord = {};
+        foreach parser:SelectionNode selection in selections {
+            if selection is parser:FieldNode {
+                parser:RootOperationType operationType = self.getOperationTypeFromData(data);
+                string[] path = self.getSelectionPathFromData(data);
+                path.push(selection.getName());
+                map<anydata> dataMap = {[OPERATION_TYPE] : operationType, [PATH] : path};
+                dataRecord[selection.getAlias()] = self.visitField(selection, dataMap);
+            } else if selection is parser:FragmentNode {
+                Data fragmentData = <Data>self.visitFragment(selection, data);
+                foreach [string, anydata] [key, value] in fragmentData.entries() {
+                    dataRecord[key] = value;
+                }
+            }
         }
+        return dataRecord;
     }
 
     public isolated function visitField(parser:FieldNode fieldNode, anydata data = ()) returns anydata {
         parser:RootOperationType operationType = self.getOperationTypeFromData(data);
         boolean isIntrospection = true;
-        Data dataMap = {};
+        anydata result = "";
         if fieldNode.getName() == SCHEMA_FIELD {
             IntrospectionExecutor introspectionExecutor = new(self.schema);
-            dataMap[fieldNode.getAlias()] = introspectionExecutor.getSchemaIntrospection(fieldNode);
+            result = introspectionExecutor.getSchemaIntrospection(fieldNode);
         } else if fieldNode.getName() == TYPE_FIELD {
             IntrospectionExecutor introspectionExecutor = new(self.schema);
-            dataMap[fieldNode.getAlias()] = introspectionExecutor.getTypeIntrospection(fieldNode);
+            result = introspectionExecutor.getTypeIntrospection(fieldNode);
         } else if fieldNode.getName() == TYPE_NAME_FIELD {
             if operationType == parser:OPERATION_QUERY {
-                dataMap[fieldNode.getAlias()] = QUERY_TYPE_NAME;
+                result = QUERY_TYPE_NAME;
             } else if operationType == parser:OPERATION_MUTATION {
-                dataMap[fieldNode.getAlias()] = MUTATION_TYPE_NAME;
+                result = MUTATION_TYPE_NAME;
             } else {
-                dataMap[fieldNode.getAlias()] = SUBSCRIPTION_TYPE_NAME;
+                result = SUBSCRIPTION_TYPE_NAME;
             }
         } else {
             isIntrospection = false;
         }
         if !isIntrospection {
-            dataMap[fieldNode.getAlias()]  = self.resolve(fieldNode, operationType);
+            return self.resolve(fieldNode, operationType);
         }
-        return dataMap;
+        return result;
     }
 
     public isolated function visitFragment(parser:FragmentNode fragmentNode, anydata data = ()) returns anydata {
@@ -108,23 +111,7 @@ isolated class Executor {
             map<anydata> updatedData = {[OPERATION_TYPE] : operationType, [PATH] : path};
             return self.visitSelectionsParallelly(fragmentNode, updatedData.cloneReadOnly());
         }
-        Data dataMap = {};
-        foreach parser:SelectionNode selection in fragmentNode.getSelections() {
-            if selection is parser:FieldNode {
-                path.push(selection.getName());
-                map<anydata> updatedData = {[OPERATION_TYPE] : operationType, [PATH] : path};
-                Data fieldData = <Data>self.visitField(selection, updatedData);
-                foreach [string, anydata] [key, value] in fieldData.entries() {
-                    dataMap[key] = value;
-                }
-            } else if selection is parser:FragmentNode {
-                map<anydata> updatedData = {[OPERATION_TYPE] : operationType, [PATH] : path};
-                Data fragmentData = <Data>self.visitFragment(selection, updatedData);
-                foreach [string, anydata] [key, value] in fragmentData.entries() {
-                    dataMap[key] = value;
-                }
-            }
-        }
+        Data dataMap = <Data>self.visitSelections(fragmentNode.getSelections(), data);
         return dataMap;
     }
 
@@ -174,28 +161,30 @@ isolated class Executor {
     private isolated function visitSelectionsParallelly(parser:SelectionParentNode selectionParentNode,
             readonly & anydata data = ()) returns anydata {
         parser:RootOperationType operationType = self.getOperationTypeFromData(data);
-        [parser:SelectionNode, future<anydata>][] selectionFutures = [];
         string[] path = self.getSelectionPathFromData(data);
-        Data dataMap = {};
+        Data dataRecord = {};
+        [parser:FieldNode, future<anydata>][] selectionFutures = [];
         foreach parser:SelectionNode selection in selectionParentNode.getSelections() {
             if selection is parser:FieldNode {
                 path.push(selection.getName());
+                map<anydata> dataMap = {[OPERATION_TYPE] : operationType, [PATH] : path};
+                future<anydata> 'future = start self.visitField(selection, dataMap.cloneReadOnly());
+                selectionFutures.push([selection, 'future]);
+            } else if selection is parser:FragmentNode {
+                Data fragmentData = <Data>self.visitSelectionsParallelly(selection, data);
+                foreach [string, anydata] [key, value] in fragmentData.entries() {
+                    dataRecord[key] = value;
+                }
             }
-            map<anydata> updatedData = {[OPERATION_TYPE] : operationType, [PATH] : path};
-            future<anydata> 'future = start self.visitSelection(selection, updatedData.cloneReadOnly());
-            selectionFutures.push([selection, 'future]);
         }
         foreach [parser:SelectionNode, future<anydata>] [selection, 'future] in selectionFutures {
             anydata|error result = wait 'future;
             if result is anydata {
-                foreach [string, anydata] [key, value] in (<Data>result).entries() {
-                    dataMap[key] = value;
-                }
+                dataRecord[selection.getAlias()] = result;
                 continue;
-            }
-            if selection is parser:FieldNode {
+            } else {
                 path.push(selection.getName());
-                dataMap[selection.getAlias()] = ();
+                dataRecord[selection.getAlias()] = ();
                 ErrorDetail errorDetail = {
                     message: result.message(),
                     locations: [selection.getLocation()],
@@ -206,7 +195,7 @@ isolated class Executor {
                 }
             }
         }
-        return dataMap;
+        return dataRecord;
     }
 
     private isolated function setResult(any|error result) = @java:Method {
