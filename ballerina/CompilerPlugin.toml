@@ -3,7 +3,7 @@ id = "graphql-dimuthu-compiler-plugin"
 class = "io.dimuthu.stdlib.graphql.compiler.GraphqlCompilerPlugin"
 
 [[dependency]]
-path = "../compiler-plugin/build/libs/graphql-dimuthu-compiler-plugin-1.11.6-SNAPSHOT.jar"
+path = "../compiler-plugin/build/libs/graphql-dimuthu-compiler-plugin-1.11.7-SNAPSHOT.jar"
 
 [[dependency]]
-path = "../commons/build/libs/graphql-dimuthu-commons-1.11.6-SNAPSHOT.jar"
+path = "../commons/build/libs/graphql-dimuthu-commons-1.11.7-SNAPSHOT.jar"
