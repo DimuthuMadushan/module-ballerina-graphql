@@ -124,9 +124,10 @@ isolated class Engine {
         operationNode.accept(operationNodeModifier);
         parser:OperationNode modifiedOperationNode = operationNodeModifier.getOperationNode();
 
-        ExecutorVisitor executor = new (self, self.schema, context, result);
-        modifiedOperationNode.accept(executor);
-        OutputObject outputObject = executor.getOutput();
+        Executor executor = new (self, self.schema, context, result);
+        OutputObject outputObject = executor.execute(modifiedOperationNode);
+        // modifiedOperationNode.accept(executor);
+        // OutputObject outputObject = executor.getOutput();
         ResponseFormatter responseFormatter = new (self.schema);
         return responseFormatter.getCoercedOutputObject(outputObject, modifiedOperationNode);
     }
