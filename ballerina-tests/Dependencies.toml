@@ -354,7 +354,7 @@ modules = [
 [[package]]
 org = "dimuthu"
 name = "graphql"
-version = "1.11.6"
+version = "1.11.7"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
@@ -385,7 +385,7 @@ modules = [
 [[package]]
 org = "dimuthu"
 name = "graphql_tests"
-version = "1.11.6"
+version = "1.11.7"
 dependencies = [
 	{org = "ballerina", name = "constraint"},
 	{org = "ballerina", name = "file"},
