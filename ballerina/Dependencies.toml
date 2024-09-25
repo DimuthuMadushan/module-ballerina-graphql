@@ -73,7 +73,7 @@ modules = [
 [[package]]
 org = "ballerina"
 name = "http"
-version = "2.10.15"
+version = "2.10.16"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
@@ -375,7 +375,7 @@ modules = [
 [[package]]
 org = "dimuthu"
 name = "graphql"
-version = "1.11.5"
+version = "1.11.6"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
