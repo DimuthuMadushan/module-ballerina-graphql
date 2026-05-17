@@ -106,3 +106,5 @@ test.dependsOn ":${packageName}-commons:build"
 
 publishToMavenLocal.dependsOn build
 publish.dependsOn build
+
+//comment
